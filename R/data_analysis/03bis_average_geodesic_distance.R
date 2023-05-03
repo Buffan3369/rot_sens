@@ -9,7 +9,7 @@ library(geosphere)
 timescale <- seq(from = 10, to = 540, by = 10)
 # Load model outputs -----------------------------------------------------
 # Define available models
-models <- c("WR13", "TC16", "SC18", "ME21", "MA16")
+models <- c("WR13", "TC16", "SC16", "ME21", "MA16")
 # Load
 for (i in models) {
   assign(i,
@@ -44,8 +44,8 @@ geodes_dist <- function(tmp_sub, in.km = TRUE){ #tmp_sub = c(lon_mdl1, lat_mdl2,
 }
 
 # Convert to dataframe with reference coordinates
-geodes_dist_df <- data.frame(lng = SC18$lng,
-                             lat = SC18$lat)
+geodes_dist_df <- data.frame(lng = SC16$lng,
+                             lat = SC16$lat)
 cnames <- c()
 # Run for loop across time
 for (t in timescale) {
@@ -53,7 +53,7 @@ for (t in timescale) {
   col_indx <- c(paste0("lng_", t), paste0("lat_", t))
   tmp <- cbind(WR13[, col_indx],
                MA16[, col_indx],
-               SC18[, col_indx],
+               SC16[, col_indx],
                TC16[, col_indx],
                ME21[, col_indx])
   GD_dist <- apply(X = tmp,

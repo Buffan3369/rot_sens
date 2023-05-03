@@ -6,7 +6,7 @@
 library(hash)
 
 # Define available models
-models <- c("WR13", "TC16", "SC18", "ME21", "MA16")
+models <- c("WR13", "TC16", "SC16", "ME21", "MA16")
 
 # Load files (uncomment as soon as we get files from Sabin) ---------------
 # for (i in models) {
@@ -14,22 +14,22 @@ models <- c("WR13", "TC16", "SC18", "ME21", "MA16")
 #          readRDS(file = paste0("./data/grid_palaeocoordinates/", i, ".RDS")))
 # }
 
-# Load files rotated by Mat -----------------------------------------------
+# Load grids rotated by Mat -----------------------------------------------
 for (i in models) {
   assign(i,
          read.csv(file = paste0("./python/rotated_grids/", i, ".csv")))
 }
 
 # Get reference ( = present-day) coordinates
-ref_coords <- SC18[, c("lng", "lat")]
+ref_coords <- SC16[, c("lng", "lat")]
 
 # Update files ------------------------------------------------------------
 
 # Expand MA16 to be temporally consistent with the scale of the study (Phanerozoic)
-MA16[(ncol(MA16) + 1):ncol(SC18)] <- NA  # (use SC18 as reference)
+MA16[(ncol(MA16) + 1):ncol(SC16)] <- NA  # (use SC16 as reference)
 
 # Update column names
-colnames(MA16) <- colnames(SC18)
+colnames(MA16) <- colnames(SC16)
 
 # Eliminate present-day cells that are not covered by at least one model 
 not_covered <- hash::hash(keys = models,

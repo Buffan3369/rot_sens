@@ -8,7 +8,7 @@ library(matrixStats)
 
 # Analysis ----------------------------------------------------------------
 # Define available models
-models <- c("WR13", "TC16", "SC18", "ME21", "MA16")
+models <- c("WR13", "TC16", "SC16", "ME21", "MA16")
 
 # Load model files --------------------------------------------------------
 for (i in models) {
@@ -17,14 +17,14 @@ for (i in models) {
 }
 
 # Get lat indexes columns for SD calculation
-lat_indx <- grep("lat", colnames(SC18))
+lat_indx <- grep("lat", colnames(SC16))
 lat_indx <- lat_indx[!(lat_indx == 2)] #remove index corresponding to t = 0
 
 # Create empty dataframe for populating
-df_sd <- matrix(ncol = length(lat_indx), nrow = nrow(SC18))
+df_sd <- matrix(ncol = length(lat_indx), nrow = nrow(SC16))
 df_sd <- data.frame(df_sd)
 # Add col names
-colnames(df_sd) <- colnames(SC18)[lat_indx]
+colnames(df_sd) <- colnames(SC16)[lat_indx]
 
 # Calculate row SD
 for (i in 1:length(lat_indx)) {
@@ -32,7 +32,7 @@ for (i in 1:length(lat_indx)) {
   mat <- data.frame(TC16[, wc],
                     MA16[, wc],
                     WR13[, wc],
-                    SC18[, wc],
+                    SC16[, wc],
                     ME21[, wc])
   row_sd <- apply(X = mat, 
                   MARGIN = 1,
@@ -42,7 +42,7 @@ for (i in 1:length(lat_indx)) {
 }
 
 # Tidy up and save --------------------------------------------------------
-ref_coords <- SC18[, c("lng", "lat")] #reference (=present-day) coordinates
+ref_coords <- SC16[, c("lng", "lat")] #reference (=present-day) coordinates
 df_sd <- cbind.data.frame(ref_coords, df_sd)
 saveRDS(df_sd, file = "./results/lat_SD.RDS")
 
