@@ -79,7 +79,6 @@ p1 <- ggplot(data = counts_df, aes(x = time, y = counts, fill = cat)) +
         panel.border = element_rect(colour = "black", fill = NA, linewidth = 1))
 # Add geological timescale
 p1 <- p1 + coord_geo(pos = "bottom", xlim = c(545, 0), fill = "grey95", height = unit(1.5, "line"))
-p1
 # Normalised geodesic distance --------------------------------------------
 # Load data and drop lng/lat column
 df <- readRDS("./results/GDD_LF.RDS")
