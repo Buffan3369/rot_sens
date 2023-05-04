@@ -18,7 +18,7 @@ source("./R/data_analysis/02_lat_sd.R")
 rm(list = ls())
 
 # Calculate minimum spanning tree length between points
-source("./R/data_analysis/03_MST.R")
+source("./R/data_analysis/03bis_average_geodesic_distance.R")
 rm(list = ls())
 
 # Case study --------------------------------------------------------------

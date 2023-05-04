@@ -33,10 +33,12 @@ upper <- seq(from = 530, to = 0, by = -10)
 #assign bins to data
 for(i in 1:length(mid)){
   crocs[which(
-    crocs$mid_ma <= lower[i] & crocs$mid_ma >= upper[i]),c("bin_mid_ma")] <- mid[i]
+    crocs$mid_ma <= lower[i] & crocs$mid_ma >= upper[i]),c("bin_mid_ma")] <- mid[i] #max(crocs$mid_ma) = 232.5 Ma
 }
-#retain occurrences less than 200 Myr in age
-crocs <- crocs[which(crocs$bin_mid_ma <= 200),]
-
 # Save data ---------------------------------------------------------------
 saveRDS(crocs, "./data/occurrences/cleaned_croc_dataset.RDS")
+# Export as .csv for further rotation --------------------------------------
+occ_df <- crocs[, c("occurrence_no", "lng", "lat", "mid_ma")]
+write.csv(occ_df,
+          file = paste0("./python/data/crocs.csv"),
+          row.names = FALSE)

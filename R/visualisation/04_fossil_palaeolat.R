@@ -7,17 +7,17 @@ library(ggplot2)
 library(ggpubr)
 library(matrixStats)
 library(Hmisc)
-# Corals -----------------------------------------------------------------
+# Coral reefs -----------------------------------------------------------------
 # List files
-files <- list.files("./data/fossil_palaeocoordinates/corals/", full.names = TRUE)
+files <- list.files("./python/data/reef_palaeorot/", full.names = TRUE)
 # Coral Reefs
-df <- data.frame(time = readRDS(files[1])$mid_ma,
+df <- data.frame(time = read.csv(files[1])$mid_ma,
                  min = NA,
                  median = NA,
                  max = NA)
 
 for (i in files) {
-  palaeolat <- readRDS(i)[, c("palaeolat")]
+  palaeolat <- read.csv(i)[, c("palaeolat")]
   df <- cbind.data.frame(df, palaeolat)
 }
 

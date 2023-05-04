@@ -36,12 +36,15 @@ mid <- seq(from = 535, to = 5, by = -10)
 upper <- seq(from = 530, to = 0, by = -10)
 #assign bins to data
 for(i in 1:length(mid)){
-  PARED[which(PARED$mid_ma <= lower[i] & PARED$mid_ma >= upper[i]),c("bin_mid_ma")] <- mid[i]
+  PARED[which(PARED$mid_ma <= lower[i] & PARED$mid_ma >= upper[i]),c("bin_mid_ma")] <- mid[i] #max(PARED$mid_ma) = 231.5 Ma
 }
 #update column names
 names(PARED)[names(PARED) == c("latit")] <- c("lat") 
 names(PARED)[names(PARED) == c("longit")] <- c("lng")
-#retain occurrences less than 200 Myr in age
-PARED <- PARED[which(PARED$bin_mid_ma <= 200),]
 # Save data ----------------------------------------------------------------
-saveRDS(PARED, "./data/occurrences/cleaned_PARED_dataset.RDS")
+saveRDS(PARED, "./data/occurrences/cleaned_reef_dataset.RDS")
+# Export as .csv for further rotation --------------------------------------
+occ_df <- PARED[, c("r_number", "lng", "lat", "mid_ma")]
+write.csv(occ_df,
+          file = paste0("./python/data/reef.csv"),
+          row.names = FALSE)
