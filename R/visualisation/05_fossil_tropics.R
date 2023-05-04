@@ -88,47 +88,35 @@ p1 <- ggplot(data = df, aes(x = time, y = max, colour = model, shape = model)) +
         deeptime::coord_geo(pos = "bottom", fill = "grey95", height = unit(1.5, "line")) +
   guides(colour=guide_legend(ncol=2))
 # Crocs -------------------------------------------------------------------
-# List files
-files <- list.files("./data/fossil_palaeocoordinates/crocs/", full.names = TRUE)
-# Models
-models <- sub("_.*", "", sub(".*/", "", files))
-# Crocs
-df <- data.frame(time = rep(seq(from = 5, to = 235, by = 10), times = 6),
-                 entity = "Crocodylomorphs",
+crocs <- readRDS("./data/fossil_palaeocoordinates/croc_palaeoccordinates_5_models.RDS")
+df <- data.frame(time = rep(seq(from = 5, to = 235, by = 10), times = 5),
+                 entity = "Coral croc",
                  max = NA,
-                 model = rep(models, each = 20))
-
-for (i in files) {
-  # Temp model
-  mdl <- sub("_.*", "", sub(".*/", "", i))
-  # Load data
-  tmp <- readRDS(i)
-  # Extract columns
-  tmp <- data.frame(entity = rep("Crocodylomorphs", times = nrow(tmp)),
-                    model = tmp$rot_model,
-                    time = tmp$bin_mid_ma,
-                    palaeolat = tmp$palaeolat)
-  # Extract bins
-  bins <- seq(from = 5, to = 235, by = 10)
+                 model = rep(colnames(crocs)[5:9], each = 24))
+crocs$bin <- NA
+bins <- seq(from = 5, to = 235, by = 10)
+for(bin in bins){
+  if(bin == 5){
+    crocs$bin[which(crocs$time < bin)] <- bin
+  }
+  else{
+    crocs$bin[which((crocs$time >= bin-10) & (crocs$time < bin))] <- bin
+  }
+}
+for(mdl in colnames(crocs)[5:9]){
+  tmp <- crocs[, c("bin", mdl)]
   # Max lat per bin
   for (j in bins) {
     # If no vals available skip
-    if (nrow(tmp[which(tmp$time == j), ]) == 0) {next}
+    if (nrow(tmp[which(tmp$bin == j), ]) == 0) {next}
+    # If all values are NA, skip
+    if (all(is.na(tmp[which(tmp$bin == j), c(mdl)]))) {next}
     # Get maximum absolute latitude
-    val <- max(abs(tmp[which(tmp$time == j), c("palaeolat")]), na.rm = TRUE)
+    val <- max(abs(tmp[which(tmp$bin == j), c(mdl)]), na.rm = TRUE)
     # Add to dataframe
     df$max[which(df$time == j & df$model == mdl)] <- val
   }
 }
-
-# Update names for plotting
-df[which(df$model == "GOLONKA"), c("model")] <- "WR13"
-df[which(df$model == "PALEOMAP"), c("model")] <- "SCO18"
-df[which(df$model == "MERDITH2021"), c("model")] <- "MER21"
-df[which(df$model == "MULLER2016"), c("model")] <- "MUL16"
-df[which(df$model == "SETON2012"), c("model")] <- "SET12"
-df[which(df$model == "MATTHEWS2016"), c("model")] <- "MAT16"
-
 # Calculate ribbon coordinates
 rib <- data.frame(time = bins, max = NA, min = NA, model = NA)
 for (i in 1:nrow(rib)) {
