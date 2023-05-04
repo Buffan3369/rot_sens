@@ -16,6 +16,10 @@ df <- data.frame(time = read.csv(files[1])$mid_ma,
                  median = NA,
                  max = NA)
 
+extract_palaeolat <- function(occ_idx, ds){
+  
+}
+
 for (i in files) {
   palaeolat <- read.csv(i)[, c("palaeolat")]
   df <- cbind.data.frame(df, palaeolat)
@@ -49,7 +53,7 @@ p1 <- ggplot(data = df[, 1:4], aes(x = time, y = median)) +
   scale_y_continuous(limits = c(-90, 90),
                      labels = seq(-90, 90, 30),
                      breaks = seq(-90, 90, 30)) + 
-  scale_x_reverse(limits = c(200, 0)) +
+  scale_x_reverse(limits = c(235, 0)) +
   labs(title = "Coral Reefs",
        x = "Time (Ma)",
        y = "Palaeolatitude (\u00B0)") +

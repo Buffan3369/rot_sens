@@ -40,5 +40,5 @@ saveRDS(crocs, "./data/occurrences/cleaned_croc_dataset.RDS")
 # Export as .csv for further rotation --------------------------------------
 occ_df <- crocs[, c("occurrence_no", "lng", "lat", "mid_ma")]
 write.csv(occ_df,
-          file = paste0("./python/data/crocs.csv"),
+          file = paste0("./python/data/croc.csv"),
           row.names = FALSE)
