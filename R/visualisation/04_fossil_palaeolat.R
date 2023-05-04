@@ -29,15 +29,13 @@ df <- data.frame(time = read.csv(files[1])$mid_ma,
                  min = NA,
                  median = NA,
                  max = NA)
-col.names <- c()
 for (i in files) {
   df_mod <- read.csv(i)
   palaeolat <- unlist(lapply(X = 1:nrow(df_mod), FUN = extract_palaeolat, ds = df_mod, lat.cols = lat.cols))
   file <- strsplit(i, split = "/")[[1]][length(strsplit(i, split = "/")[[1]])]
-  col.names <- c(col.names, strsplit(file, split = "_")[[1]][1])
   df <- cbind.data.frame(df, palaeolat)
 }
-colnames(df)[5:9] <- col.names
+colnames(df)[5:9] <- sub("_.*", "", sub(".*/", "", files))
 # Get stats
 df$min <- rowMins(as.matrix.data.frame(df[5:9]), na.rm = TRUE)
 df$median <- rowMedians(as.matrix.data.frame(df[5:9]), na.rm = TRUE)
@@ -47,6 +45,9 @@ df$count <- 5 - rowSums2(is.na(df[5:9]), na.rm = TRUE)
 
 # Remove Inf data for plotting
 df <- df[-which(is.infinite(df$max) == TRUE), ]
+
+# Save dataframe for next plot
+saveRDS(df, "./data/fossil_palaeocoordinates/reef_palaeoccordinates_5_models.RDS")
 
 #Correlation time~range
 TIME <- sort(unique(df$time)) #time intervals covered by df
@@ -92,21 +93,21 @@ df <- data.frame(time = read.csv(files[1])$mid_ma,
                  min = NA,
                  median = NA,
                  max = NA)
-col.names <- c()
 for (i in files) {
   df_mod <- read.csv(i)
   palaeolat <- unlist(lapply(X = 1:nrow(df_mod), FUN = extract_palaeolat, ds = df_mod, lat.cols = lat.cols))
-  file <- strsplit(i, split = "/")[[1]][length(strsplit(i, split = "/")[[1]])]
-  col.names <- c(col.names, strsplit(file, split = "_")[[1]][1])
   df <- cbind.data.frame(df, palaeolat)
 }
-colnames(df)[5:9] <- col.names
+colnames(df)[5:9] <- sub("_.*", "", sub(".*/", "", files))
 # Get stats
 df$min <- rowMins(as.matrix.data.frame(df[5:9]), na.rm = TRUE)
 df$median <- rowMedians(as.matrix.data.frame(df[5:9]), na.rm = TRUE)
 df$max <- rowMaxs(as.matrix.data.frame(df[5:9]), na.rm = TRUE)
 # Number of models - NAs
 df$count <- 5 - rowSums2(is.na(df[5:9]), na.rm = TRUE)
+
+# Save dataframe for next plot
+saveRDS(df, "./data/fossil_palaeocoordinates/croc_palaeoccordinates_5_models.RDS")
 
 #Correlation time~range
 TIME <- sort(unique(df$time)) #time intervals covered by df
@@ -156,3 +157,4 @@ ggsave(filename = "./figures/lat_range.png",
        width = 210,
        units = "mm",
        dpi = 600)
+
