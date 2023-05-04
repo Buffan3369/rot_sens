@@ -12,13 +12,13 @@ pal <- c('#f7fcb9','#addd8e','#41ab5d','#006837','#004529', 'black')
 df <- readRDS("./results/lat_SD_LF.RDS")
 # Print summary of uncertainty
 cenozoic <- df[which(df$time <= 66), ]
-print(paste0(length(which(cenozoic$lat_sd > 5))/nrow(cenozoic), "% of cells have a value more than 5"))
+print(paste0(round(length(which(cenozoic$lat_sd > 5))/nrow(cenozoic), digits = 3)*100, "% of cells have a value more than 5"))
 mesozoic <- df[which(df$time > 66 & df$time <= 252), ]
-print(paste0(length(which(mesozoic$lat_sd > 5))/nrow(mesozoic), "% of cells have a value more than 5"))
+print(paste0(round(length(which(mesozoic$lat_sd > 5))/nrow(mesozoic), digits = 3)*100, "% of cells have a value more than 5"))
 palaeozoic <- df[which(df$time > 252), ]
-print(paste0(length(which(palaeozoic$lat_sd > 5))/nrow(palaeozoic), "% of cells have a value more than 5"))
+print(paste0(round(length(which(palaeozoic$lat_sd > 5))/nrow(palaeozoic), digits = 3)*100, "% of cells have a value more than 5"))
 cambrian <- df[which(df$time > 485), ]
-print(paste0(length(which(cambrian$lat_sd > 20))/nrow(cambrian), "% of cells have a value more than 20"))
+print(paste0(round(length(which(cambrian$lat_sd > 20))/nrow(cambrian), digits = 3)*100, "% of cells have a value more than 20"))
 # Ages to plot
 ages <- c(60, 120, 180, 240, 300, 360, 420, 480, 540)
 # Subset df based on ages specified above
