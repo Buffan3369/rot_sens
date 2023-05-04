@@ -7,6 +7,20 @@ library(ggplot2)
 library(ggpubr)
 library(matrixStats)
 library(Hmisc)
+# Extract palaeolatitude from rotated occurrences -----------------------------
+extract_palaeolat <- function(occ_idx, ds, lat.cols){
+  sub <- as.character(ds[occ_idx, lat.cols])
+  sub <- suppressWarnings(unlist(lapply(X = sub, FUN = as.numeric)))
+  if(length(which(is.na(sub) == FALSE)) == 0){
+    return(NA)
+  }
+  else{
+    return(sub[which(is.na(sub) == FALSE)])
+  }
+}
+
+lat.cols <- unlist(lapply(X = seq(from = 5, to = 235, by = 10),
+                          FUN = function(x){return(paste0("lat_", x))}))
 # Coral reefs -----------------------------------------------------------------
 # List files
 files <- list.files("./python/data/reef_palaeorot/", full.names = TRUE)
@@ -15,22 +29,21 @@ df <- data.frame(time = read.csv(files[1])$mid_ma,
                  min = NA,
                  median = NA,
                  max = NA)
-
-extract_palaeolat <- function(occ_idx, ds){
-  
-}
-
+col.names <- c()
 for (i in files) {
-  palaeolat <- read.csv(i)[, c("palaeolat")]
+  df_mod <- read.csv(i)
+  palaeolat <- unlist(lapply(X = 1:nrow(df_mod), FUN = extract_palaeolat, ds = df_mod, lat.cols = lat.cols))
+  file <- strsplit(i, split = "/")[[1]][length(strsplit(i, split = "/")[[1]])]
+  col.names <- c(col.names, strsplit(file, split = "_")[[1]][1])
   df <- cbind.data.frame(df, palaeolat)
 }
-
+colnames(df)[5:9] <- col.names
 # Get stats
-df$min <- rowMins(as.matrix.data.frame(df[5:10]), na.rm = TRUE)
-df$median <- rowMedians(as.matrix.data.frame(df[5:10]), na.rm = TRUE)
-df$max <- rowMaxs(as.matrix.data.frame(df[5:10]), na.rm = TRUE)
+df$min <- rowMins(as.matrix.data.frame(df[5:9]), na.rm = TRUE)
+df$median <- rowMedians(as.matrix.data.frame(df[5:9]), na.rm = TRUE)
+df$max <- rowMaxs(as.matrix.data.frame(df[5:9]), na.rm = TRUE)
 # Number of models - NAs
-df$count <- 6 - rowSums2(is.na(df[5:10]), na.rm = TRUE)
+df$count <- 5 - rowSums2(is.na(df[5:9]), na.rm = TRUE)
 
 # Remove Inf data for plotting
 df <- df[-which(is.infinite(df$max) == TRUE), ]
@@ -69,28 +82,31 @@ p1 <- ggplot(data = df[, 1:4], aes(x = time, y = median)) +
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(), 
         panel.background = element_blank(),
-        panel.border = element_rect(colour = "black", fill = NA, size = 0.5)) +
+        panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5)) +
   deeptime::coord_geo(pos = "bottom", fill = "grey95", height = unit(1.5, "line"))
 # Crocs ------------------------------------------------------------------
 # List files
-files <- list.files("./data/fossil_palaeocoordinates/crocs/", full.names = TRUE)
+files <- list.files("./python/data/croc_palaeorot/", full.names = TRUE)
 # Crocs
-df <- data.frame(time = readRDS(files[1])$mid_ma,
+df <- data.frame(time = read.csv(files[1])$mid_ma,
                  min = NA,
                  median = NA,
                  max = NA)
-
+col.names <- c()
 for (i in files) {
-  palaeolat <- readRDS(i)[, c("palaeolat")]
+  df_mod <- read.csv(i)
+  palaeolat <- unlist(lapply(X = 1:nrow(df_mod), FUN = extract_palaeolat, ds = df_mod, lat.cols = lat.cols))
+  file <- strsplit(i, split = "/")[[1]][length(strsplit(i, split = "/")[[1]])]
+  col.names <- c(col.names, strsplit(file, split = "_")[[1]][1])
   df <- cbind.data.frame(df, palaeolat)
 }
-
+colnames(df)[5:9] <- col.names
 # Get stats
-df$min <- rowMins(as.matrix.data.frame(df[5:10]), na.rm = TRUE)
-df$median <- rowMedians(as.matrix.data.frame(df[5:10]), na.rm = TRUE)
-df$max <- rowMaxs(as.matrix.data.frame(df[5:10]), na.rm = TRUE)
+df$min <- rowMins(as.matrix.data.frame(df[5:9]), na.rm = TRUE)
+df$median <- rowMedians(as.matrix.data.frame(df[5:9]), na.rm = TRUE)
+df$max <- rowMaxs(as.matrix.data.frame(df[5:9]), na.rm = TRUE)
 # Number of models - NAs
-df$count <- 6 - rowSums2(is.na(df[5:10]), na.rm = TRUE)
+df$count <- 5 - rowSums2(is.na(df[5:9]), na.rm = TRUE)
 
 #Correlation time~range
 TIME <- sort(unique(df$time)) #time intervals covered by df
@@ -127,7 +143,7 @@ p2 <- ggplot(data = df[, 1:4], aes(x = time, y = median)) +
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(), 
         panel.background = element_blank(),
-        panel.border = element_rect(colour = "black", fill = NA, size = 0.5)) +
+        panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5)) +
   deeptime::coord_geo(pos = "bottom", fill = "grey95", height = unit(1.5, "line"))
 
 # Combine plots -----------------------------------------------------------
