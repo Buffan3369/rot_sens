@@ -49,11 +49,30 @@ for (i in 1:nrow(rib)) {
 # Update -Inf values (no coral reef in this bin)
 rib[which(is.infinite(rib$max)), c("max", "min")] <- NA
 
+#Uncertainty function
+uncertainty <- function(bin){
+  maxLat <- df$max[which(df$time == bin)]
+  if(all(is.na(maxLat)) == FALSE){
+    return(max(maxLat, na.rm = T) - min(maxLat, na.rm = T))
+  }
+  else{
+    return(NA)
+  }
+}
+# Max uncertainty
+MAX <- max(unlist(lapply(X = bins, FUN = uncertainty)), na.rm = TRUE)
+print(paste0("Reconstructions of the palaeolatitudinal extent of the (sub-)tropics based on coral reef occurrences can vary up to ",
+             round(MAX, digits = 1), "° throughout the last 240 My."))
+# Average uncertainty
+AV <- mean(unlist(lapply(X = bins, FUN = uncertainty)), na.rm = TRUE)
+print(paste0("Reconstructions of the palaeolatitudinal extent of the (sub-)tropics based on coral reef occurrences on average varies by ",
+             round(AV, digits = 1), "° throughout the last 240 My."))
 # Correlation between time and ribbon width (i.e palaeolatitudinal uncertainty)
 r <- Hmisc::rcorr(x = rib$time, y = abs(rib$max - rib$min), type = "pearson")
 print(paste0("Coral time~uncertainty correlation coefficient (r): ", round(r$r[1,2], digits = 2)))
 print(paste0("Coral time~uncertainty correlation p-value (p): ", round(r$P[1,2], digits = 7)))
 print(paste0("Coral average uncertainty is: ", mean(abs(rib$max - rib$min), na.rm = TRUE)))
+
 #plot
 p1 <- ggplot(data = df, aes(x = time, y = max, colour = model, shape = model)) +
         #geom_line(size = 1) +
@@ -87,6 +106,7 @@ p1 <- ggplot(data = df, aes(x = time, y = max, colour = model, shape = model)) +
               panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5)) +
         deeptime::coord_geo(pos = "bottom", fill = "grey95", height = unit(1.5, "line")) +
   guides(colour=guide_legend(ncol=2))
+
 # Crocs -------------------------------------------------------------------
 crocs <- readRDS("./data/fossil_palaeocoordinates/croc_palaeoccordinates_5_models.RDS")
 df <- data.frame(time = rep(seq(from = 5, to = 235, by = 10), times = 5),
@@ -123,6 +143,15 @@ for (i in 1:nrow(rib)) {
   rib$max[i] <- max(df$max[which(df$time == rib$time[i])])
   rib$min[i] <- min(df$max[which(df$time == rib$time[i])])
 }
+
+# Max uncertainty
+MAX <- max(unlist(lapply(X = bins, FUN = uncertainty)), na.rm = TRUE)
+print(paste0("Reconstructions of the palaeolatitudinal extent of the (sub-)tropics based on crocodylomorph occurrences can vary up to ",
+             round(MAX, digits = 1), "° throughout the last 240 My."))
+# Average uncertainty
+AV <- mean(unlist(lapply(X = bins, FUN = uncertainty)), na.rm = TRUE)
+print(paste0("Reconstructions of the palaeolatitudinal extent of the (sub-)tropics based on crocodylomorph occurrences on average varies by ",
+             round(AV, digits = 1), "° throughout the last 240 My."))
 
 # Correlation between time and ribbon width (i.e palaeolatitudinal uncertainty)
 r <- Hmisc::rcorr(x = rib$time, y = (rib$max - rib$min), type = "pearson")
