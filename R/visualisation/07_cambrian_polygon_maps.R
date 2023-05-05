@@ -50,19 +50,19 @@ p2 <- plot_map(paleomap_500, main = "500 Ma - Scotese (2016)", bb = bb)
 p3 <- plot_map(merdith_500, main = "500 Ma - Merdith et al. (2021)", bb = bb)
 p4 <- plot_map(tc_500, main = "500 Ma - Torsvik and Cocks (2016)", bb = bb)
 # 540 Ma
-p4 <- plot_map(golonka_540, main = "540 Ma - Wright et al. (2013)", bb = bb)
-p5 <- plot_map(paleomap_540, main = "540 Ma - Scotese (2016)", bb = bb)
-p6 <- plot_map(merdith_540, main = "540 Ma - Merdith et al. (2021)", bb = bb)
-p4 <- plot_map(tc_540, main = "500 Ma - Torsvik and Cocks (2016)", bb = bb)
+p5 <- plot_map(golonka_540, main = "540 Ma - Wright et al. (2013)", bb = bb)
+p6 <- plot_map(paleomap_540, main = "540 Ma - Scotese (2016)", bb = bb)
+p7 <- plot_map(merdith_540, main = "540 Ma - Merdith et al. (2021)", bb = bb)
+p8 <- plot_map(tc_540, main = "500 Ma - Torsvik and Cocks (2016)", bb = bb)
 
 # Combine plots -----------------------------------------------------------
 # Arrange plot
-p <- ggarrange(p1, p4, p2, p5, p3, p6, ncol = 2, nrow = 3,
-               labels = c("(a)", "(b)", "(c)", "(d)", "(e)", "(f)"),
+p <- ggarrange(p1, p5, p2, p6, p3, p7, p4, p8, ncol = 2, nrow = 4,
+               labels = c("(a)", "(b)", "(c)", "(d)", "(e)", "(f)", "(g)", "(h)"),
                font.label = list(size = 18), align = "hv")
 # Save plot
 ggsave(filename = "./figures/cambrian_continental_polygons.png",
-       height = 250,
+       height = 300,
        width = 250,
        units = "mm",
        bg = "white",
