@@ -4,7 +4,7 @@
 # Email: Lucas.L.Buffan@gmail.com; LewisAlan.Jones@uvigo.es
 # Load libraries ----------------------------------------------------------
 library(ggplot2)
-library(ggpubr)
+library(cowplot)
 library(raster)
 library(sf)
 # Load --------------------------------------------------------------------
@@ -17,22 +17,19 @@ bb <- st_transform(x = bb, crs = "ESRI:54030")
 
 # Load polygons and project to robinson
 # Golonka polygons
-golonka <- read_sf("./data/continental_polygons/GOLONKA/GOLONKA_PresentDay_ContinentalPolygons.shp")
+golonka <- sf::read_sf("https://gws.gplates.org/reconstruct/coastlines/?&time=0&model=GOLONKA")
 
 # Scotese polygons
-paleomap <- read_sf("./data/continental_polygons/PALEOMAP/PALEOMAP_PresentDay_ContinentalPolygons.shp")
+paleomap <- sf::read_sf("https://gws.gplates.org/reconstruct/coastlines/?&time=0&model=PALEOMAP")
 
 # Matthews polygons
-matthews <- read_sf("./data/continental_polygons/MATTHEWS2016_pmag_ref/MATTHEWS2016_pmag_ref_PresentDay_ContinentalPolygons.shp")
-
-# Seton polygons
-seton <- read_sf("./data/continental_polygons/SETON2012/SETON2012_PresentDay_ContinentalPolygons.shp")
-
-# Muller polygons
-muller <- read_sf("./data/continental_polygons/MULLER2016/MULLER2016_PresentDay_ContinentalPolygons.shp")
+matthews <- sf::read_sf("https://gws.gplates.org/reconstruct/coastlines/?&time=0&model=MATTHEWS2016_pmag_ref")
 
 # Merdith polygons
-merdith <- read_sf("./data/continental_polygons/MERDITH2021/MERDITH2021_PresentDay_ContinentalPolygons.shp")
+merdith <- sf::read_sf("https://gws.gplates.org/reconstruct/coastlines/?&time=0&model=MERDITH2021")
+
+# Torsvik and Coks polygons
+tc <- sf::read_sf("https://gws.gplates.org/reconstruct/static_polygons/?time=0&model=TorsvikCocks2017&anchor_plate_id=1")
 
 # Plot --------------------------------------------------------------------
 # Plot function
@@ -45,26 +42,33 @@ plot_map <- function(x, main, bb){
     theme(
       plot.margin = margin(5, 5, 5, 5, "mm"),
       axis.text = element_blank(),
-      plot.title = element_text(hjust = 0.5)) +
+      plot.title = element_text(hjust = 0.5, size = 12)) +
     coord_sf(crs = sf::st_crs("ESRI:54030"))
 }
 # Create plots
-p1 <- plot_map(seton, main = "Seton et al. (2012)", bb = bb)
-p2 <- plot_map(golonka, main = "Wright et al. (2013)", bb = bb)
+p1 <- plot_map(golonka, main = "Wright et al. (2013)", bb = bb)
+p2 <- plot_map(tc, main = "Torsvik and Cocks (2016)", bb = bb)
 p3 <- plot_map(matthews, main = "Matthews et al. (2016)", bb = bb)
-p4 <- plot_map(muller, main = "M\U00FCller et al. (2016)", bb = bb)
-p5 <- plot_map(paleomap, main = "Scotese & Wright (2018)", bb = bb)
-p6 <- plot_map(merdith, main = "Merdith et al. (2021)", bb = bb)
+p4 <- plot_map(paleomap, main = "Scotese & Wright (2018)", bb = bb)
+p5 <- plot_map(merdith, main = "Merdith et al. (2021)", bb = bb)
 
 # Combine plots -----------------------------------------------------------
 # Arrange plot
-p <- ggarrange(p1, p2, p3, p4, p5, p6, ncol = 2, nrow = 3,
-               labels = c("(a)", "(b)", "(c)", "(d)", "(e)", "(f)"),
-               font.label = list(size = 18))
+top_row <- cowplot::plot_grid(p1, p2, p3, NULL, 
+                              labels = c("(a)", "(b)", "(c)", NA),
+                              ncol = 4,
+                              label_size = 18,
+                              rel_widths = c(1/3, 1/3, 1/3, 0))
+bottom_row <- cowplot::plot_grid(NULL, p4, p5, NULL,
+                                 labels = c(NA, "(d)", "(e)", NA),
+                                 label_size = 18,
+                                 ncol = 4,
+                                 rel_widths = c(0.125, 0.25, 0.25, 0.125))
+p <- cowplot::plot_grid(top_row, bottom_row, nrow = 2)
 # Save plot
 ggsave(filename = "./figures/continental_polygons.png",
-       height = 250,
-       width = 250,
+       height = 150,
+       width = 300,
        units = "mm",
        bg = "white",
        dpi = 600)
