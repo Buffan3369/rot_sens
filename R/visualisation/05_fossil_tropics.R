@@ -71,7 +71,7 @@ p1 <- ggplot(data = df, aes(x = time, y = max, colour = model, shape = model)) +
         scale_y_continuous(limits = c(0, 70), 
                            breaks = seq(0, 70, 15),
                            labels = seq(0, 70, 15)) + 
-        scale_x_reverse(limits = c(200, 0)) +
+        scale_x_reverse(limits = c(240, 0)) +
         theme(plot.margin = margin(5, 10, 5, 10, "mm"),
               axis.title.x = element_text(size = 14),
               axis.title.y = element_text(size = 14),
@@ -84,7 +84,7 @@ p1 <- ggplot(data = df, aes(x = time, y = max, colour = model, shape = model)) +
               panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(), 
               panel.background = element_blank(),
-              panel.border = element_rect(colour = "black", fill = NA, size = 0.5)) +
+              panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5)) +
         deeptime::coord_geo(pos = "bottom", fill = "grey95", height = unit(1.5, "line")) +
   guides(colour=guide_legend(ncol=2))
 # Crocs -------------------------------------------------------------------
@@ -147,7 +147,7 @@ p2 <- ggplot(data = df, aes(x = time, y = max, colour = model, shape = model)) +
         scale_y_continuous(limits = c(35, 85), 
                            breaks = seq(35, 85, 15),
                            labels = seq(35, 85, 15)) + 
-        scale_x_reverse(limits = c(200, 0)) +
+        scale_x_reverse(limits = c(240, 0)) +
         theme(plot.margin = margin(5, 10, 5, 10, "mm"),
               axis.title.x = element_text(size = 14),
               axis.title.y = element_text(size = 14),
@@ -160,7 +160,7 @@ p2 <- ggplot(data = df, aes(x = time, y = max, colour = model, shape = model)) +
               panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(), 
               panel.background = element_blank(),
-              panel.border = element_rect(colour = "black", fill = NA, size = 0.5)) +
+              panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5)) +
         deeptime::coord_geo(pos = "bottom", fill = "grey95", height = unit(1.5, "line")) +
   guides(colour=guide_legend(ncol=2))
 
