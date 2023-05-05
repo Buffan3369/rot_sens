@@ -2,11 +2,13 @@
 # Purpose: Plot Cambrian polygon maps
 # Author(s): Lucas Buffan & Lewis A. Jones
 # Email: Lucas.L.Buffan@gmail.com; LewisAlan.Jones@uvigo.es
+
 # Load libraries ----------------------------------------------------------
 library(ggplot2)
 library(ggpubr)
 library(sf)
 library(raster)
+
 # Load --------------------------------------------------------------------
 # Set up bounding box
 ras <- raster::raster(res = 5, val = 1)
@@ -23,6 +25,9 @@ golonka_540 <- sf::read_sf("https://gws.gplates.org/reconstruct/static_polygons/
 # MERDITH 2021
 merdith_500 <- sf::read_sf("https://gws.gplates.org/reconstruct/static_polygons/?&time=500&model=MERDITH2021")
 merdith_540 <- sf::read_sf("https://gws.gplates.org/reconstruct/static_polygons/?&time=540&model=MERDITH2021")
+# TORSVIK AND COCKS 2016
+tc_500 <- sf::read_sf("https://gws.gplates.org/reconstruct/static_polygons/?time=500&model=TorsvikCocks2017&anchor_plate_id=1")
+tc_540 <- sf::read_sf("https://gws.gplates.org/reconstruct/static_polygons/?time=540&model=TorsvikCocks2017&anchor_plate_id=1")
 
 # Plot --------------------------------------------------------------------
 # Plot function
@@ -43,10 +48,12 @@ plot_map <- function(x, main, bb){
 p1 <- plot_map(golonka_500, main = "500 Ma - Wright et al. (2013)", bb = bb)
 p2 <- plot_map(paleomap_500, main = "500 Ma - Scotese (2016)", bb = bb)
 p3 <- plot_map(merdith_500, main = "500 Ma - Merdith et al. (2021)", bb = bb)
+p4 <- plot_map(tc_500, main = "500 Ma - Torsvik and Cocks (2016)", bb = bb)
 # 540 Ma
 p4 <- plot_map(golonka_540, main = "540 Ma - Wright et al. (2013)", bb = bb)
 p5 <- plot_map(paleomap_540, main = "540 Ma - Scotese (2016)", bb = bb)
 p6 <- plot_map(merdith_540, main = "540 Ma - Merdith et al. (2021)", bb = bb)
+p4 <- plot_map(tc_540, main = "500 Ma - Torsvik and Cocks (2016)", bb = bb)
 
 # Combine plots -----------------------------------------------------------
 # Arrange plot
