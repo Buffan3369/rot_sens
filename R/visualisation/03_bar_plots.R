@@ -79,7 +79,7 @@ p1 <- ggplot(data = counts_df, aes(x = time, y = counts, fill = cat)) +
         panel.border = element_rect(colour = "black", fill = NA, linewidth = 1))
 # Add geological timescale
 p1 <- p1 + coord_geo(pos = "bottom", xlim = c(545, 0), fill = "grey95", height = unit(1.5, "line"))
-# Normalised geodesic distance --------------------------------------------
+# Mean pairwise GDD --------------------------------------------
 # Load data and drop lng/lat column
 df <- readRDS("./results/GDD_LF.RDS")
 # Drop geometry
@@ -136,7 +136,7 @@ p2 <- ggplot(data = counts_df, aes(x = time, y = counts, fill = cat)) +
                      labels = seq(from = 0, to = 1, by = 0.2)) +
   labs(x = "Time (Ma)",
        y = "Cell proportion",
-       fill = "Normalised Geodesic distance (km)") +
+       fill = "Mean pairwise GDD (km)") +
   theme(plot.margin = margin(5, 10, 5, 10, "mm"),
         axis.title.x = element_text(size = 14),
         axis.title.y = element_text(size = 14),
