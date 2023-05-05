@@ -36,7 +36,7 @@ p <-  ggplot(data = df, aes(fill = Geodesic_dist)) +
                     limits = c(0, 14000),
                     breaks = c(0, 1000, 2500, 5000, 8500, 14000)) +
   geom_sf(colour = NA, size = 0.1) +
-  labs(fill = "Normalised geodesic distance (km)") +
+  labs(fill = "Mean pairwise geodesic distance (km)") +
   theme_minimal() +
   theme(
     legend.title = element_text(size = 16),
