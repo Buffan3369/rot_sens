@@ -12,13 +12,13 @@ pal <- c('#fde0dd','#fa9fb5','#dd3497','#7a0177','#49006a', 'black')
 df <- readRDS("./results/GDD_LF.RDS")
 # Print summary of uncertainty
 cenozoic <- df[which(df$time <= 66), ]
-print(paste0(round(length(which(cenozoic$Geodesic_dist > 1000))/nrow(cenozoic), digits = 3)*100, "% of cells have a normalised geodesic distance value more than 1000"))
+print(paste0(round(length(which(cenozoic$Geodesic_dist > 1000))/nrow(cenozoic), digits = 3)*100, "% of cells have a normalised geodesic distance value more than 1000 km"))
 mesozoic <- df[which(df$time > 66 & df$time <= 252), ]
-print(paste0(round(length(which(mesozoic$Geodesic_dist > 1000))/nrow(mesozoic), digits = 3)*100, "% of cells have a normalised geodesic distance value more than 1000"))
+print(paste0(round(length(which(mesozoic$Geodesic_dist > 1000))/nrow(mesozoic), digits = 3)*100, "% of cells have a normalised geodesic distance value more than 1000 km"))
 palaeozoic <- df[which(df$time > 252), ]
-print(paste0(round(length(which(palaeozoic$Geodesic_dist > 1000))/nrow(palaeozoic), digits = 3)*100, "% of cells have a normalised geodesic distance value more than 1000"))
+print(paste0(round(length(which(palaeozoic$Geodesic_dist > 1000))/nrow(palaeozoic), digits = 3)*100, "% of cells have a normalised geodesic distance value more than 1000 km"))
 cambrian <- df[which(df$time > 485), ]
-print(paste0(round(length(which(cambrian$Geodesic_dist > 5000))/nrow(cambrian), digits = 3)*100, "% of cells have a normalised geodesic distance value more than 5000"))
+print(paste0(round(length(which(cambrian$Geodesic_dist > 1000))/nrow(cambrian), digits = 3)*100, "% of cells have a normalised geodesic distance value more than 1000 km"))
 # Ages to plot
 ages <- c(60, 120, 180, 240, 300, 360, 420, 480, 540)
 # Subset df
