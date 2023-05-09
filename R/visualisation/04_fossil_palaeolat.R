@@ -128,7 +128,7 @@ p2 <- ggplot(data = df[, 1:4], aes(x = time, y = median)) +
   scale_y_continuous(limits = c(-90, 90),
                      labels = seq(-90, 90, 30),
                      breaks = seq(-90, 90, 30)) + 
-  scale_x_reverse(limits = c(200, 0)) +
+  scale_x_reverse(limits = c(235, 0)) +
   labs(title = "Crocodylomorphs",
        x = "Time (Ma)",
        y = "Palaeolatitude (\u00B0)") +
