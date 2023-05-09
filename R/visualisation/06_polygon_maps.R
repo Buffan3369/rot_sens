@@ -36,39 +36,44 @@ tc <- sf::read_sf("https://gws.gplates.org/reconstruct/static_polygons/?time=0&m
 plot_map <- function(x, main, bb){
   ggplot(x) + 
     geom_sf(data = bb, fill = "lightblue", col = NA) +
-    geom_sf(size = 0.1) +
+    geom_sf(size = 0.5) +
     labs(title = main) +
     theme_void() +
     theme(
       plot.margin = margin(5, 5, 5, 5, "mm"),
       axis.text = element_blank(),
-      plot.title = element_text(hjust = 0.5, size = 12)) +
+      plot.title = element_text(hjust = 0.5, size = 9)) +
     coord_sf(crs = sf::st_crs("ESRI:54030"))
 }
 # Create plots
 p1 <- plot_map(golonka, main = "Wright et al. (2013)", bb = bb)
 p2 <- plot_map(tc, main = "Torsvik and Cocks (2016)", bb = bb)
 p3 <- plot_map(matthews, main = "Matthews et al. (2016)", bb = bb)
-p4 <- plot_map(paleomap, main = "Scotese & Wright (2018)", bb = bb)
+p4 <- plot_map(paleomap, main = "Scotese (2016)", bb = bb)
 p5 <- plot_map(merdith, main = "Merdith et al. (2021)", bb = bb)
 
 # Combine plots -----------------------------------------------------------
 # Arrange plot
-top_row <- cowplot::plot_grid(p1, p2, p3, NULL, 
-                              labels = c("(a)", "(b)", "(c)", NA),
-                              ncol = 4,
+top_row <- cowplot::plot_grid(p1, p2, 
+                              labels = c("(a)", "(b)"),
                               label_size = 18,
-                              rel_widths = c(1/3, 1/3, 1/3, 0))
-bottom_row <- cowplot::plot_grid(NULL, p4, p5, NULL,
-                                 labels = c(NA, "(d)", "(e)", NA),
+                              ncol = 2,
+                              rel_widths = c(1/2, 1/2))
+mid_row <- cowplot::plot_grid(p3, p4,
+                              labels = c("(c)", "(d)"),
+                              label_size = 18,
+                              ncol = 2,
+                              rel_widths = c(1/2, 1/2))
+bottom_row <- cowplot::plot_grid(NULL, p5, NULL,
+                                 labels = c(NA, "(e)", NA),
                                  label_size = 18,
-                                 ncol = 4,
-                                 rel_widths = c(0.125, 0.25, 0.25, 0.125))
-p <- cowplot::plot_grid(top_row, bottom_row, nrow = 2)
+                                 ncol = 3,
+                                 rel_widths = c(1/6, 2/3, 1/6))
+p <- cowplot::plot_grid(top_row, mid_row, bottom_row, nrow = 3)
 # Save plot
 ggsave(filename = "./figures/continental_polygons.png",
        height = 150,
-       width = 300,
+       width = 150,
        units = "mm",
        bg = "white",
        dpi = 600)
