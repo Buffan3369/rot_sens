@@ -136,12 +136,12 @@ p2 <- ggplot(data = counts_df, aes(x = time, y = counts, fill = cat)) +
                      labels = seq(from = 0, to = 1, by = 0.2)) +
   labs(x = "Time (Ma)",
        y = "Cell proportion",
-       fill = "Mean pairwise GDD (km)") +
+       fill = "Mean pairwise geodesic \n distance (km)") +
   theme(plot.margin = margin(5, 10, 5, 10, "mm"),
         axis.title.x = element_text(size = 14),
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 12),
-        legend.title = element_text(size = 12),
+        legend.title = element_text(size = 12, hjust = 0.5),
         legend.text = element_text(size = 12),
         legend.key.size = unit(1, "cm"),
         legend.position = "top",
