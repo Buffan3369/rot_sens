@@ -36,13 +36,13 @@ tc <- sf::read_sf("https://gws.gplates.org/reconstruct/static_polygons/?time=0&m
 plot_map <- function(x, main, bb){
   ggplot(x) + 
     geom_sf(data = bb, fill = "lightblue", col = NA) +
-    geom_sf(size = 0.5) +
+    geom_sf(size = 2) +
     labs(title = main) +
     theme_void() +
     theme(
       plot.margin = margin(5, 5, 5, 5, "mm"),
       axis.text = element_blank(),
-      plot.title = element_text(hjust = 0.5, size = 9)) +
+      plot.title = element_text(hjust = 0.5, size = 8)) +
     coord_sf(crs = sf::st_crs("ESRI:54030"))
 }
 # Create plots
@@ -56,17 +56,17 @@ p5 <- plot_map(merdith, main = "Merdith et al. (2021)", bb = bb)
 # Arrange plot
 top_row <- cowplot::plot_grid(p1, p2, 
                               labels = c("(a)", "(b)"),
-                              label_size = 18,
+                              label_size = 10,
                               ncol = 2,
                               rel_widths = c(1/2, 1/2))
 mid_row <- cowplot::plot_grid(p3, p4,
                               labels = c("(c)", "(d)"),
-                              label_size = 18,
+                              label_size = 10,
                               ncol = 2,
                               rel_widths = c(1/2, 1/2))
 bottom_row <- cowplot::plot_grid(NULL, p5, NULL,
                                  labels = c(NA, "(e)", NA),
-                                 label_size = 18,
+                                 label_size = 10,
                                  ncol = 3,
                                  rel_widths = c(1/6, 2/3, 1/6))
 p <- cowplot::plot_grid(top_row, mid_row, bottom_row, nrow = 3)
@@ -77,3 +77,4 @@ ggsave(filename = "./figures/continental_polygons.png",
        units = "mm",
        bg = "white",
        dpi = 600)
+
