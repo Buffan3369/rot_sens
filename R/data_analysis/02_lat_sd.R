@@ -8,7 +8,7 @@ library(matrixStats)
 
 # Analysis ----------------------------------------------------------------
 # Define available models
-models <- c("WR13", "TC16", "SC16", "ME21", "MA16")
+models <- c("WR13", "TC17", "SC16", "ME21", "MA16")
 
 # Load model files --------------------------------------------------------
 for (i in models) {
@@ -29,7 +29,7 @@ colnames(df_sd) <- colnames(SC16)[lat_indx]
 # Calculate row SD
 for (i in 1:length(lat_indx)) {
   wc <- lat_indx[i]
-  mat <- data.frame(TC16[, wc],
+  mat <- data.frame(TC17[, wc],
                     MA16[, wc],
                     WR13[, wc],
                     SC16[, wc],

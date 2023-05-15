@@ -47,7 +47,7 @@ plot_map <- function(x, main, bb){
 }
 # Create plots
 p1 <- plot_map(golonka, main = "Wright et al. (2013)", bb = bb)
-p2 <- plot_map(tc, main = "Torsvik and Cocks (2016)", bb = bb)
+p2 <- plot_map(tc, main = "Torsvik and Cocks (2017)", bb = bb)
 p3 <- plot_map(matthews, main = "Matthews et al. (2016)", bb = bb)
 p4 <- plot_map(paleomap, main = "Scotese (2016)", bb = bb)
 p5 <- plot_map(merdith, main = "Merdith et al. (2021)", bb = bb)

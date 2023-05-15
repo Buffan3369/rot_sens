@@ -48,12 +48,12 @@ plot_map <- function(x, main, bb){
 p1 <- plot_map(golonka_500, main = "500 Ma - Wright et al. (2013)", bb = bb)
 p2 <- plot_map(paleomap_500, main = "500 Ma - Scotese (2016)", bb = bb)
 p3 <- plot_map(merdith_500, main = "500 Ma - Merdith et al. (2021)", bb = bb)
-p4 <- plot_map(tc_500, main = "500 Ma - Torsvik and Cocks (2016)", bb = bb)
+p4 <- plot_map(tc_500, main = "500 Ma - Torsvik and Cocks (2017)", bb = bb)
 # 540 Ma
 p5 <- plot_map(golonka_540, main = "540 Ma - Wright et al. (2013)", bb = bb)
 p6 <- plot_map(paleomap_540, main = "540 Ma - Scotese (2016)", bb = bb)
 p7 <- plot_map(merdith_540, main = "540 Ma - Merdith et al. (2021)", bb = bb)
-p8 <- plot_map(tc_540, main = "500 Ma - Torsvik and Cocks (2016)", bb = bb)
+p8 <- plot_map(tc_540, main = "500 Ma - Torsvik and Cocks (2017)", bb = bb)
 
 # Combine plots -----------------------------------------------------------
 # Arrange plot

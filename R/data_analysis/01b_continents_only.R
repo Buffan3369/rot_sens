@@ -6,7 +6,7 @@
 library(hash)
 
 # Define available models
-models <- c("WR13", "TC16", "SC16", "ME21", "MA16")
+models <- c("WR13", "TC17", "SC16", "ME21", "MA16")
 
 # Load files (uncomment as soon as we get files from Sabin) ---------------
 # for (i in models) {
@@ -38,10 +38,10 @@ for(model in ls(not_covered)){
   df <- get(model)
   not_covered[[model]] <- length(which(is.na(df[, "lat_10"])))
 }
-#which.max(values(not_covered)) = TC16
-print(paste0("TC16 has the maximum number of uncovered cells (",max(values(not_covered)),
+#which.max(values(not_covered)) = TC17
+print(paste0("TC17 has the maximum number of uncovered cells (",max(values(not_covered)),
              ") : we therefore scale all other model's spatial coverage to that (i.e. remove oceans)."))
-to_remove <- which(is.na(TC16$lat_10))
+to_remove <- which(is.na(TC17$lat_10))
 rm_idx <- function(model, rm_indices){
   mdl_df <- get(model)
   return(mdl_df[-rm_indices, ])
