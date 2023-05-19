@@ -40,7 +40,7 @@ plot_map <- function(x, main, bb){
     labs(title = main) +
     theme_void() +
     theme(
-      plot.margin = margin(5, 5, 5, 5, "mm"),
+      plot.margin = margin(0, 0, 0, 0, "mm"),
       axis.text = element_blank(),
       plot.title = element_text(hjust = 0.5, size = 8)) +
     coord_sf(crs = sf::st_crs("ESRI:54030"))
@@ -68,7 +68,7 @@ bottom_row <- cowplot::plot_grid(NULL, p5, NULL,
                                  labels = c(NA, "(e)", NA),
                                  label_size = 10,
                                  ncol = 3,
-                                 rel_widths = c(1/6, 2/3, 1/6))
+                                 rel_widths = c(1, 2.5, 1))
 p <- cowplot::plot_grid(top_row, mid_row, bottom_row, nrow = 3)
 # Save plot
 ggsave(filename = "./figures/continental_polygons.png",

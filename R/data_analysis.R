@@ -3,13 +3,8 @@
 # Author(s): Lucas Buffan & Lewis A. Jones
 # Email: Lucas.L.Buffan@gmail.com; LewisAlan.Jones@uvigo.es
 # Simulation component ----------------------------------------------------
-## Build the equal-area grid and rotate -----------------------------------
-# Build grid and rotate with GPlates API (via palaeoverse) 
-source("./R/data_analysis/01_build_grid_rotate.R")
-rm(list = ls())
-
-# Get rid of oceanic surface for plotting 
-source("./R/data_analysis/01b_continents_only.R")
+## Scale reconstruction files to equal spatial coverage -------------------
+source("./R/data_analysis/01_spatial_coverage.R")
 rm(list = ls())
 
 ## Comparison  ------------------------------------------------------------
@@ -29,9 +24,4 @@ rm(list = ls())
 
 # Clean croc data
 source("./R/data_analysis/05_prepare_fossil_croc_data.R")
-rm(list = ls())
-
-## Rotate fossil occurrences ----------------------------------------------
-# Rotate fossil occurrences with GPlates API (via palaeoverse) 
-source("./R/data_analysis/06_rotate_fossils.R")
 rm(list = ls())

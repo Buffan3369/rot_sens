@@ -80,7 +80,7 @@ for (t in seq(from = 10, to = 540, by = 10)) {
 saveRDS(df, "./results/lat_SD_LF.RDS")
 
 # Create initial plot for GIF 
-p <-  ggplot(data = df, aes(fill = lat_sd)) +
+p <- ggplot(data = df, aes(fill = lat_sd)) +
         scale_fill_stepsn(colours = pal,
                           limits = c(0, 60),
                           breaks = c(0, 5, 10, 20, 30, 60)) +

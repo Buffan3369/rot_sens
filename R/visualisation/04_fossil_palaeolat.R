@@ -57,8 +57,8 @@ for(t in TIME){
   average_range <- c(average_range, mean(df$max[ind] - df$min[ind]))
 }
 res <- Hmisc::rcorr(x = TIME, y = average_range, type = "pearson")
-print(paste0("Corals time~uncertainty correlation coefficient (r): ", round(res$r[1,2], digits = 2)))
-print(paste0("Corals time~uncertainty correlation p-value (p): ", round(res$P[1,2], digits = 7)))
+message(paste0("Corals time~uncertainty correlation coefficient (r): ", round(res$r[1,2], digits = 2)))
+message(paste0("Corals time~uncertainty correlation p-value (p): ", round(res$P[1,2], digits = 7)))
 
 # Plot
 p1 <- ggplot(data = df[, 1:4], aes(x = time, y = median)) +
@@ -118,8 +118,8 @@ for(t in TIME){
 }
 res <- Hmisc::rcorr(x = TIME, y = average_range, type = "pearson")
 
-print(paste0("Crocs time~uncertainty correlation coefficient (r): ", round(res$r[1,2], digits = 2)))
-print(paste0("Crocs time~uncertainty correlation p-value (p): ", round(res$P[1,2], digits = 7)))
+message(paste0("Crocs time~uncertainty correlation coefficient (r): ", round(res$r[1,2], digits = 2)))
+message(paste0("Crocs time~uncertainty correlation p-value (p): ", round(res$P[1,2], digits = 7)))
 
 # Plot
 p2 <- ggplot(data = df[, 1:4], aes(x = time, y = median)) +

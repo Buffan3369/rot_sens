@@ -49,7 +49,7 @@ for (t in seq(from = 10, to = 540, by = 10)) {
     geom_sf(colour = NA, size = 0.1) +
     labs(title = paste0("Time step: ", t,
                         " Ma"),
-         fill = "Normalised geodesic distance (km)") +
+         fill = "Mean pairwise geodesic distance (km)") +
     theme_minimal() +
     theme(
       plot.background = element_rect(fill = "white", colour = NA),
@@ -86,7 +86,7 @@ p <-  ggplot(data = df, aes(fill = Geodesic_dist)) +
   geom_sf(colour = NA, size = 0.1) +
   labs(title = paste0("Time step: {as.integer(unique(df$time)[frame])}",
                       " Ma"),
-       fill = "Normalised geodesic distance (km)") +
+       fill = "Mean pairwise geodesic distance (km)") +
   theme_minimal() +
   theme(
     plot.background = element_rect(fill = "white", colour = NA),

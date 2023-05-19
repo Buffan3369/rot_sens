@@ -13,7 +13,7 @@ models <- c("WR13", "TC17", "SC16", "ME21", "MA16")
 # Load model files --------------------------------------------------------
 for (i in models) {
   assign(i,
-         readRDS(file = paste0("./data/mdls_without_oceans/", i, ".RDS")))
+         readRDS(file = paste0("./data/grid_palaeocoordinates/", i, ".RDS")))
 }
 
 # Get lat indexes columns for SD calculation
@@ -49,8 +49,8 @@ saveRDS(df_sd, file = "./results/lat_SD.RDS")
 ## Ncells counter ---------------------------------------------------------
 ncells_over_time <- vector("numeric")
 # Count number of NA cells over time
-for (i in 2:(ncol(df_sd))) {
-  ncells_over_time[i] <- length(which(!is.na(df_sd[, i])))
+for (i in 3:ncol(df_sd)) {
+  ncells_over_time[i-2] <- nrow(df_sd) - sum(is.na(df_sd[, i]))
 }
-t <- seq(from = 0, to = 540, by = 10)
+t <- seq(from = 10, to = 540, by = 10)
 plot(x = t, y = ncells_over_time)

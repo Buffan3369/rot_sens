@@ -61,17 +61,17 @@ uncertainty <- function(bin){
 }
 # Max uncertainty
 MAX <- max(unlist(lapply(X = bins, FUN = uncertainty)), na.rm = TRUE)
-print(paste0("Reconstructions of the palaeolatitudinal extent of the (sub-)tropics based on coral reef occurrences can vary up to ",
+message(paste0("Reconstructions of the palaeolatitudinal extent of the (sub-)tropics based on coral reef occurrences can vary up to ",
              round(MAX, digits = 1), "° throughout the last 240 My."))
 # Average uncertainty
 AV <- mean(unlist(lapply(X = bins, FUN = uncertainty)), na.rm = TRUE)
-print(paste0("Reconstructions of the palaeolatitudinal extent of the (sub-)tropics based on coral reef occurrences on average varies by ",
+message(paste0("Reconstructions of the palaeolatitudinal extent of the (sub-)tropics based on coral reef occurrences on average varies by ",
              round(AV, digits = 1), "° throughout the last 240 My."))
 # Correlation between time and ribbon width (i.e palaeolatitudinal uncertainty)
 r <- Hmisc::rcorr(x = rib$time, y = abs(rib$max - rib$min), type = "pearson")
-print(paste0("Coral time~uncertainty correlation coefficient (r): ", round(r$r[1,2], digits = 2)))
-print(paste0("Coral time~uncertainty correlation p-value (p): ", round(r$P[1,2], digits = 7)))
-print(paste0("Coral average uncertainty is: ", mean(abs(rib$max - rib$min), na.rm = TRUE)))
+message(paste0("Coral time~uncertainty correlation coefficient (r): ", round(r$r[1,2], digits = 2)))
+message(paste0("Coral time~uncertainty correlation p-value (p): ", round(r$P[1,2], digits = 7)))
+message(paste0("Coral average uncertainty is: ", mean(abs(rib$max - rib$min), na.rm = TRUE)))
 
 #plot
 p1 <- ggplot(data = df, aes(x = time, y = max, colour = model, shape = model)) +
@@ -146,18 +146,18 @@ for (i in 1:nrow(rib)) {
 
 # Max uncertainty
 MAX <- max(unlist(lapply(X = bins, FUN = uncertainty)), na.rm = TRUE)
-print(paste0("Reconstructions of the palaeolatitudinal extent of the (sub-)tropics based on crocodylomorph occurrences can vary up to ",
+message(paste0("Reconstructions of the palaeolatitudinal extent of the (sub-)tropics based on crocodylomorph occurrences can vary up to ",
              round(MAX, digits = 1), "° throughout the last 240 My."))
 # Average uncertainty
 AV <- mean(unlist(lapply(X = bins, FUN = uncertainty)), na.rm = TRUE)
-print(paste0("Reconstructions of the palaeolatitudinal extent of the (sub-)tropics based on crocodylomorph occurrences on average varies by ",
+message(paste0("Reconstructions of the palaeolatitudinal extent of the (sub-)tropics based on crocodylomorph occurrences on average varies by ",
              round(AV, digits = 1), "° throughout the last 240 My."))
 
 # Correlation between time and ribbon width (i.e palaeolatitudinal uncertainty)
 r <- Hmisc::rcorr(x = rib$time, y = (rib$max - rib$min), type = "pearson")
-print(paste0("Crocs time~uncertainty correlation coefficient (r): ", round(r$r[1,2], digits = 2)))
-print(paste0("Crocs time~uncertainty correlation p-value (p): ", round(r$P[1,2], digits = 7)))
-print(paste0("Crocs average uncertainty is: ", mean(abs(rib$max - rib$min), na.rm = TRUE)))
+message(paste0("Crocs time~uncertainty correlation coefficient (r): ", round(r$r[1,2], digits = 2)))
+message(paste0("Crocs time~uncertainty correlation p-value (p): ", round(r$P[1,2], digits = 7)))
+message(paste0("Crocs average uncertainty is: ", mean(abs(rib$max - rib$min), na.rm = TRUE)))
 
 #plot
 p2 <- ggplot(data = df, aes(x = time, y = max, colour = model, shape = model)) +

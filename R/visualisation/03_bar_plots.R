@@ -43,6 +43,9 @@ for (i in t) {
   }
 }
 
+df_0 <- data.frame(time = 0, lower = -5, upper = 5, cat = "0 \U2013 5", counts = 1)
+counts_df <- rbind.data.frame(df_0, counts_df)
+
 # Set factor levels
 counts_df$cat <- factor(counts_df$cat, levels = c("0 \U2013 5", 
                                                   "5 \U2013 10", 
@@ -114,6 +117,9 @@ for (i in t) {
     counts_df$counts[which(counts_df$time == i & counts_df$lower == lower[j])] <- counts
   }
 }
+
+df_0 <- data.frame(time = 0, lower = -5, upper = 5, cat = "0 \U2013 1000", counts = 1)
+counts_df <- rbind.data.frame(df_0, counts_df)
 
 # Set factor levels
 counts_df$cat <- factor(counts_df$cat, levels = c("0 \U2013 1000",
