@@ -39,7 +39,7 @@ In this repository, files and code are organised as:
 
 ## Workflow
 
-All reconstructions were were generated using the GPlates software called via pygplates, see: `/python/`.
+All reconstructions were generated using the GPlates software called via pygplates, see: `/python/`.
 
 The workflow and documentation for data analysis can be found in: `/R/data_analysis.R`.
 
