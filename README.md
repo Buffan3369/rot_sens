@@ -2,10 +2,10 @@
 
 Author(s): [Lucas Buffan](lucas.buffan@ens-lyon.fr), [Lewis A. Jones](mailto:LewisA.Jones@outlook.com), Mathew Domeier, Christopher R. Scotese, Sabin Zahirovic, and [Sara Varela](sara.varela@uvigo.es).
 
-This repository contains the data and code required to run the analyses of the article, "Mind the uncertainty: Global Plate Model choice impacts past biogeographic reconstructions" (Buffan et al. 2022). 
+This repository contains the data and code required to run the analyses of the article, "Mind the uncertainty: Global Plate Model choice impacts past biogeographic reconstructions" (Buffan et al. 2023). 
 
 To cite the paper: 
-> Lucas Buffan, Lewis A. Jones, Mathew Domeier, Christopher R. Scotese, Sabin Zahirovic, and Sara Varela. 2022. Mind the uncertainty: Global Plate Model choice impacts past biogeographic reconstructions.
+> Lucas Buffan, Lewis A. Jones, Mathew Domeier, Christopher R. Scotese, Sabin Zahirovic, and Sara Varela. 2023. Mind the uncertainty: Global Plate Model choice impacts past biogeographic reconstructions.
 
 ![](figures/standard_deviation/time_series.gif)
 
@@ -18,7 +18,7 @@ To cite the paper:
 In this study, we evaluate the influence of Global Plate Model choice on reconstructions of the Earth's continental surface over geological timescales. Understanding this uncertainty is key to constraining the distribution of organisms in the past. This has implications for our understanding of deep time macroevolutionary and macroecolgical patterns, as well as palaeoclimatic reconstructions. Our study focused on five widely used open-source models, which are available via the [GPlates Web Service](https://gwsdoc.gplates.org/reconstruction-models):
 
 * ME21: MERDITH model (Merdith et al., 2021) - GPlates ID = MERDITH2021
-* TC17: TORSVIK & COCKS model (Matthews et al., 2016) - GPlates ID = TorsvikCocks2017
+* TC17: TORSVIK & COCKS model (Torsvik and Cocks, 2017) - GPlates ID = TorsvikCocks2017
 * SC16: PALEOMAP model (Scotese, 2016 & Scotese & Wright, 2018) - GPlates ID = PALEOMAP
 * MA16: MATTHEWS model (Matthews et al., 2016) - GPlates ID = MATTHEWS2016_pmag_ref
 * WR13: GOLONKA model (Wright et al., 2013) - GPlates ID = GOLONKA
