@@ -31,7 +31,7 @@ In this work, we first adopt a simulation approach to evaluate spatiotemporal di
 In this repository, files and code are organised as:
 
 * **Data** files are stored in the `/data/` folder
-* **Analysis** code in the `/scripts/` folder
+* **Analysis** code in the `/R/` folder
 * **Results** in the `/results/` folder
 * **Figures** in the `/figures/` folder
 
