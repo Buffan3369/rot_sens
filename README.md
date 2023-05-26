@@ -5,7 +5,7 @@ Author(s): [Lucas Buffan](lucas.buffan@ens-lyon.fr), [Lewis A. Jones](mailto:Lew
 This repository contains the data and code required to run the analyses of the article, "Mind the uncertainty: Global Plate Model choice impacts deep-time palaeobiological studies" (Buffan, Jones et al. 2023). 
 
 To cite the paper: 
-> Lucas Buffan, Lewis A. Jones, Mathew Domeier, Christopher R. Scotese, Sabin Zahirovic, and Sara Varela. 2023. Mind the uncertainty: Global Plate Model choice impacts past biogeographic reconstructions.
+> Lucas Buffan, Lewis A. Jones, Mathew Domeier, Christopher R. Scotese, Sabin Zahirovic, and Sara Varela. 2023. Mind the uncertainty: Global Plate Model choice impacts deep-time palaeobiological studies.
 
 ![](figures/standard_deviation/time_series.gif)
 
