@@ -7,6 +7,7 @@ library(ggplot2)
 library(ggpubr)
 library(deeptime)
 library(Hmisc)
+library(rphylopic)
 pal <- rev(c('#41ab5d','#006837','#004529', '#dd3497','#7a0177','#49006a'))
 shps <- c(3, 10, 15, 16, 17, 18, 20)
 # Coral reef --------------------------------------------------------------
@@ -80,6 +81,7 @@ p1 <- ggplot(data = df, aes(x = time, y = max, colour = model, shape = model)) +
                     fill = "grey80",
                     colour = "grey80") +
         geom_point(size = 3.5, stroke = 0.5, alpha = 0.75) +
+        add_phylopic(name = "scleractinia", x = 15, y = 62, ysize = 8) +
         labs(title = "Coral Reefs",
              x = "Time (Ma)",
              y = "Absolute Palaeolatitude (\u00B0)",
@@ -166,6 +168,7 @@ p2 <- ggplot(data = df, aes(x = time, y = max, colour = model, shape = model)) +
                     fill = "grey80",
                     colour = "grey80") +
         geom_point(size = 3.5, stroke = 0.5, alpha = 0.75) +
+        add_phylopic(name = "Crocodilia", x = 25, y = 85, ysize = 3) +
         labs(title = "Crocodylomorphs",
              x = "Time (Ma)",
              y = "Absolute Palaeolatitude (\u00B0)",
@@ -173,7 +176,7 @@ p2 <- ggplot(data = df, aes(x = time, y = max, colour = model, shape = model)) +
              shape = "Model") +
         scale_colour_manual(values = pal) +
         scale_shape_manual(values = shps) +
-        scale_y_continuous(limits = c(35, 85), 
+        scale_y_continuous(limits = c(35, 90), 
                            breaks = seq(35, 85, 15),
                            labels = seq(35, 85, 15)) + 
         scale_x_reverse(limits = c(240, 0)) +
