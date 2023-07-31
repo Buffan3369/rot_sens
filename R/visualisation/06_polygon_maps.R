@@ -17,19 +17,19 @@ bb <- st_transform(x = bb, crs = "ESRI:54030")
 
 # Load polygons and project to robinson
 # Golonka polygons
-golonka <- sf::read_sf("https://gws.gplates.org/reconstruct/coastlines/?&time=0&model=GOLONKA")
+golonka <- sf::read_sf("./data/coastlines/WR13.shp")
 
 # Scotese polygons
-paleomap <- sf::read_sf("https://gws.gplates.org/reconstruct/coastlines/?&time=0&model=PALEOMAP")
+paleomap <- sf::read_sf("./data/coastlines/SC16.shp")
 
 # Matthews polygons
-matthews <- sf::read_sf("https://gws.gplates.org/reconstruct/coastlines/?&time=0&model=MATTHEWS2016_pmag_ref")
+matthews <- sf::read_sf("./data/coastlines/MA16.shp")
 
 # Merdith polygons
-merdith <- sf::read_sf("https://gws.gplates.org/reconstruct/coastlines/?&time=0&model=MERDITH2021")
+merdith <- sf::read_sf("./data/coastlines/ME21.shp")
 
-# Torsvik and Coks polygons
-tc <- sf::read_sf("https://gws.gplates.org/reconstruct/static_polygons/?time=0&model=TorsvikCocks2017&anchor_plate_id=1")
+# Torsvik and Cocks polygons
+tc <- sf::read_sf("./data/coastlines/TC17.shp")
 
 # Plot --------------------------------------------------------------------
 # Plot function
